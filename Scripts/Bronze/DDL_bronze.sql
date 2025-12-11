@@ -1,3 +1,7 @@
+IF OBJECT_ID('bronze.crm_cust_info','U') IS NOT NULL
+	DROP TABLE bronze.crm_cust_info
+GO
+
 
 create table bronze.crm_cust_info (
 	cst_id int not null,
@@ -8,8 +12,12 @@ create table bronze.crm_cust_info (
 	cst_gndr nvarchar(50),
 	cst_create_date Date
 );
-
 GO
+
+IF OBJECT_ID ('bronze.crm_prd_info','U') IS NOT NULL
+	DROP TABLE bronze.crm_prd_info
+
+
 create table bronze.crm_prd_info(
 	prd_id int not null,
 	prd_key nvarchar(50),
@@ -21,6 +29,11 @@ create table bronze.crm_prd_info(
 
 );
 GO
+IF OBJECT_ID('bronze.crm_sales_details','U') IS NOT NULL
+	DROP TABLE bronze.crm_sales_details
+
+GO
+
 create table bronze.crm_sales_details(
 	sls_ord_num nvarchar(50),
 	sls_prd_key nvarchar(50),
@@ -35,6 +48,9 @@ create table bronze.crm_sales_details(
 );
 GO
 
+IF OBJECT_ID('bronze.erp_cust_az12','U') IS NOT NULL
+	DROP TABLE bronze.erp_cust_az12
+
 create table bronze.erp_cust_az12(
 	cid nvarchar(50),
 	bdate date,
@@ -43,10 +59,18 @@ create table bronze.erp_cust_az12(
 );
 GO
 
+IF OBJECT_ID('bronze.erp_loc_a101','U') IS NOT NULL
+	DROP TABLE bronze.erp_loc_a101
+GO
+
 create table bronze.erp_loc_a101(
 	cid nvarchar(50),
 	cntry nvarchar(50)
 );
+GO
+
+IF OBJECT_ID('bronze.erp_px_cat_g1v2','U') IS NOT NULL
+	DROP TABLE bronze.erp_px_cat_g1v2
 GO
 
 create table bronze.erp_px_cat_g1v2 (
