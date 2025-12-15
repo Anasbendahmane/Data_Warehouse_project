@@ -3,6 +3,10 @@
 ## ⚙️ Overview
 This project demonstrates a full end-to-end Data Warehouse solution built using SQL Server. It follows the **Medallion Architecture** (Bronze → Silver → Gold) and ends with a clean star-schema ready for analytics and reporting.  
 
+
+<img width="937" height="479" alt="Data architecture project" src="https://github.com/user-attachments/assets/a02a2da4-6bbb-4c55-8a50-eeb5259145a2" />
+
+
 The goal is to consolidate data from CRM and ERP sources, clean and normalize it, and build a structured warehouse that supports reporting, business-insights and analytics.
 
 --- 
