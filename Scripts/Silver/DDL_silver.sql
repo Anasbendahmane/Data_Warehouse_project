@@ -8,7 +8,8 @@ CREATE TABLE silver.crm_cust_info (
 	cst_lastname nvarchar(50),
 	cst_marital_status nvarchar(50),
 	cst_gndr nvarchar(50),
-	cst_create_date Date
+	cst_create_date Date,
+	dwh_create_date DATETIME2 DEFAULT GETDATE() 
 );
 GO
 
@@ -24,7 +25,8 @@ CREATE TABLE silver.crm_prd_info(
 	prd_cost int,
 	prd_line nvarchar(50),
 	prd_start_dt datetime,
-	prd_end_dt datetime
+	prd_end_dt datetime,
+	dwh_create_date DATETIME2 DEFAULT GETDATE() 
 );
 GO
 
@@ -41,7 +43,8 @@ CREATE TABLE silver.crm_sales_details (
 	sls_due_dt int,
 	sls_sales int,
 	sls_quantity int,
-	sls_price int
+	sls_price int,
+	dwh_create_date DATETIME2 DEFAULT GETDATE() 
 );
 GO
 
@@ -52,7 +55,8 @@ GO
 CREATE TABLE silver.erp_cust_az12 (
 	cid nvarchar(50),
 	bdate date,
-	gen nvarchar(50)
+	gen nvarchar(50),
+	dwh_create_date DATETIME2 DEFAULT GETDATE() 
 
 );
 GO
@@ -62,7 +66,8 @@ IF OBJECT_ID('silver.erp_loc_a101','U') IS NOT NULL
 
 CREATE TABLE silver.erp_loc_a101 (
 	cid nvarchar(50),
-	cntry nvarchar(50)
+	cntry nvarchar(50),
+	dwh_create_date DATETIME2 DEFAULT GETDATE() 
 );
 GO
 
@@ -74,6 +79,7 @@ create table silver.erp_px_cat_g1v2 (
 	id nvarchar(50),
 	cat nvarchar(50),
 	subcat nvarchar(50),
-	maintenance nvarchar(50)
+	maintenance nvarchar(50),
+	dwh_create_date DATETIME2 DEFAULT GETDATE() 
 );
 GO
