@@ -20,13 +20,14 @@ GO
 
 CREATE TABLE silver.crm_prd_info(
 	prd_id int,
-	prd_key nvarchar(50),
+	ctg_id nvarchar(50) ,
+    prd_key nvarchar(50), 
 	prd_nm nvarchar(50),
-	prd_cost int,
+	prd_cost int ,
 	prd_line nvarchar(50),
-	prd_start_dt datetime,
-	prd_end_dt datetime,
-	dwh_create_date DATETIME2 DEFAULT GETDATE() 
+	prd_start_dt Datetime,
+	prd_end_dt Datetime,
+	dwh_create_date Datetime2 DEFAULT GETDATE()
 );
 GO
 
@@ -38,9 +39,9 @@ CREATE TABLE silver.crm_sales_details (
 	sls_ord_num nvarchar(50),
 	sls_prd_key nvarchar(50),
 	sls_cust_id int,
-	sls_order_dt int,
-	sls_ship_dt int,
-	sls_due_dt int,
+	sls_order_dt DATE,
+	sls_ship_dt DATE,
+	sls_due_dt DATE,
 	sls_sales int,
 	sls_quantity int,
 	sls_price int,
