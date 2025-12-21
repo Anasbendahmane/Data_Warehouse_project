@@ -82,26 +82,7 @@ where ranking_records = 1
 ------------------------Product info-----------------------
 --The prd_key contains many informations (split the string into informations and deriving two new columns)
 
-IF OBJECT_ID('silver.crm_prd_info','U') IS NOT NULL
-BEGIN
-    DROP TABLE silver.crm_prd_info;
-END
-GO
 
-CREATE TABLE silver.crm_prd_info(
-
-	prd_id int,
-	ctg_id nvarchar(50) ,
-    prd_key nvarchar(50), 
-	prd_nm nvarchar(50),
-	prd_cost int ,
-	prd_line nvarchar(50),
-	prd_start_dt Datetime,
-	prd_end_dt Datetime,
-	dwh_create_date Datetime2 DEFAULT GETDATE()
-	
-
-)
 
 INSERT INTO Silver.crm_prd_info(
 	prd_id,
@@ -130,5 +111,47 @@ SELECT
 	prd_start_dt,
 	DATEADD(day,-1,LEAD(prd_start_dt) over(partition by prd_key order by prd_start_dt)) as prd_end_dt
 from bronze.crm_prd_info
+
+------------------------Sales details-----------------------
+
+INSERT INTO silver.crm_sales_details(
+
+	sls_ord_num ,
+	sls_prd_key ,
+	sls_cust_id ,
+	sls_order_dt ,
+	sls_ship_dt ,
+	sls_due_dt ,
+	sls_sales ,
+	sls_quantity ,
+	sls_price 
+
+)
+
+
+
+SELECT 
+	 sls_ord_num,
+     sls_prd_key,
+     sls_cust_id,
+	 CASE 
+		  WHEN sls_order_dt <= 0 OR LEN(sls_order_dt) != 8 then NULL -- Handle invalid dates (0, negative,or incorrect length) 
+		  ELSE CAST(CAST(sls_order_dt as VARCHAR) AS DATE)
+     END as sls_order_dt ,
+     CAST(CAST(sls_ship_dt as varchar) AS DATE) as sls_ship_dt,
+     CAST(CAST(sls_due_dt as varchar) AS date) as sls_due_dt,
+     CASE 
+		WHEN sls_sales <= 0 OR sls_sales IS NULL OR abs(sls_sales) != sls_quantity * ABS(sls_price) THEN ABS(sls_price) * ABS(sls_quantity) --if sales is null or negative then quantity * price
+		ELSE sls_sales
+	 END as sls_sales,
+     ABS(sls_quantity) as quantity ,
+     CASE 
+		WHEN sls_price IS NULL or sls_price = 0 THEN ABS(sls_sales)/ABS(sls_quantity) 
+		else sls_price
+	 END AS sls_price
+from bronze.crm_sales_details
+
+
+
 
 
