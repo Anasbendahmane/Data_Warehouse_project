@@ -1,4 +1,5 @@
 USE Datawarehousing;
+-------------------------------------CRM Tables----------------------------------------
 ------------ customer infos-----------------
 --- fixing the first issue
 /*
@@ -150,6 +151,36 @@ SELECT
 		else sls_price
 	 END AS sls_price
 from bronze.crm_sales_details
+
+
+--------------------------------------------ERP TABLES---------------------------------------
+
+------------------------------- Customer infos----------------------------------
+INSERT INTO silver.erp_cust_az12(
+	cid,
+	bdate,
+	gen
+)
+
+
+
+
+select
+	CASE 
+		WHEN LEN(cid) != 10 THEN SUBSTRING(cid,4,LEN(cid))
+		ELSE cid
+	END AS cid,
+	CASE 
+		 WHEN bdate > GETDATE() THEN NULL
+		 ELSE bdate
+	END AS bdate,
+	CASE 
+		WHEN gen ='M' then 'Male'
+		WHEN gen ='F' then 'Female'
+		WHEN gen IS NULL OR gen =' ' then 'unkown'
+	    ELSE gen
+	END AS gen
+from bronze.erp_cust_az12
 
 
 
