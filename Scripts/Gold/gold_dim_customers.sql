@@ -22,9 +22,5 @@ from silver.crm_cust_info as cci
 LEFT JOIN silver.erp_cust_az12 as eca
 ON eca.cid = cci.cst_key
 LEFT JOIN silver.erp_loc_a101 as eloc
-<<<<<<<< HEAD:Scripts/Gold/gold_dim_customers.sql
 ON eloc.cid = eca.cid)
-========
-ON eloc.cid = eca.cid
-)
->>>>>>>> 948e4963ba057d9bf8c35711f6165a9e8d190cf9:Scripts/Gold/Gold_dim_customers.sql
+
