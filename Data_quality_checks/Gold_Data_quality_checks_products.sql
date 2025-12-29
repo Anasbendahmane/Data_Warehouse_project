@@ -23,3 +23,4 @@ from(
 )as t
 group by t.prd_key
 having COUNT(*) > 1
+
