@@ -1,4 +1,5 @@
 ---Customers View
+
 CREATE VIEW gold.dim_customers AS(
 select 
 	ROW_NUMBER() over(order by cci.cst_create_date)  as customer_key, -- generate a surrogote key to connect the data model
@@ -21,5 +22,4 @@ from silver.crm_cust_info as cci
 LEFT JOIN silver.erp_cust_az12 as eca
 ON eca.cid = cci.cst_key
 LEFT JOIN silver.erp_loc_a101 as eloc
-ON eloc.cid = eca.cid
-)
+ON eloc.cid = eca.cid)
