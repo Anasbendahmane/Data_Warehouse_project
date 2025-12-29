@@ -20,3 +20,58 @@ The goal is to consolidate data from CRM and ERP sources, clean and normalize it
 
 
 
+---
+
+## 📝 How to Use  
+
+### 1️⃣ Clone the Repository
+
+git clone https://github.com/Anasbendahmane/Data_Warehouse_project.git
+
+### 2️⃣ Initialize the Database & Schemas
+
+Run the scripts located in `/Scripts/Bronze/` to create the **Datawarehousing** database and the three-tier schema architecture:
+
+- **bronze**
+- **silver**
+- **gold**
+
+---
+
+### 3️⃣ Load the Bronze Layer (Ingestion)
+
+1. Place your source CSV files into the designated source directory.
+2. Execute the ingestion stored procedure to pull raw data into the warehouse:
+
+EXEC bronze.load_bronze;
+
+
+### 4️⃣ Load the Silver Layer (Cleansing)
+
+Run the Silver scripts to process raw data into the quality layer.
+
+Execute the transformation procedure to:
+- Clean and standardize data
+- Fix date ranges
+- Correct sales calculations
+- Ensure gender consistency
+
+EXEC silver.load_silver;
+
+
+### 5️⃣ Finalize the Gold Layer (Modeling)
+
+Run the scripts located in `/Scripts/Gold/` to generate the final **Dimension** and **Fact** tables.
+
+> **Note:**  
+> These tables utilize **Surrogate Keys** to decouple the warehouse from source system changes and significantly improve query performance.
+
+---
+
+### 6️⃣ Analytics & Reporting
+
+Connect your preferred BI tool to the **Gold layer views** for visualization and business intelligence analysis:
+
+- Power BI  
+- Tableau  
+- Excel  
